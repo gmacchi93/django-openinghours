@@ -105,7 +105,7 @@ def opening_hours(location=None, concise=False):
             'name': o.get_weekday_display(),
             'from_hour': o.from_hour,
             'to_hour': o.to_hour,
-            'hours': '%s%s to %s%s' % (
+            'hours': '%s%s - %s%s' % (
                 o.from_hour.strftime('%I:%M').lstrip('0'),
                 o.from_hour.strftime('%p').lower(),
                 o.to_hour.strftime('%I:%M').lstrip('0'),
@@ -119,7 +119,7 @@ def opening_hours(location=None, concise=False):
             days.append({
                 'day_number': day_number,
                 'name': day_name,
-                'hours': 'Closed'
+                'hours': 'Cerrado'
             })
     days = sorted(days, key=lambda k: k['day_number'])
 
