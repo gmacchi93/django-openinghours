@@ -10,7 +10,7 @@ class OpeningHoursInline(admin.TabularInline):
 
 
 class CompanyAdmin(admin.ModelAdmin):
-    inlines = [OpeningHoursInline, ClosingRulesInline]
+    inlines = [OpeningHoursInline]
     search_fields = ['name', 'slug']
 
 # OPENINGHOURS_PREMISES_MODEL users need to register
