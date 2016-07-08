@@ -1,16 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from openinghours.models import OpeningHours, ClosingRules, Company
+from openinghours.models import OpeningHours, Company
 from openinghours.app_settings import PREMISES_MODEL
 
 
 class OpeningHoursInline(admin.TabularInline):
     model = OpeningHours
-    extra = 0
-
-
-class ClosingRulesInline(admin.StackedInline):
-    model = ClosingRules
     extra = 0
 
 
