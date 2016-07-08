@@ -58,16 +58,16 @@ form{padding-top:2em}
             {{ day.slot2.opens }} - {{ day.slot2.shuts }}</span>
         <label><input type="checkbox" class="closed"
             id="closed{{ day.number }}"
-            {% if day.closed %}checked{% endif %}> Closed</label>
+            {% if day.closed %}checked{% endif %}> Cerrado</label>
         {% if forloop.first %}
             <button class="btn btn-default btn-xs" id="repeat">
-                Apply to all days</button>
+                Aplicar a todos los dias</button>
         {% endif %}
     </div>
     {% endfor %}
     <p><label><input type="checkbox" id="two_sets"
         {% if two_sets %}checked{% endif %}>
-        There are 2 sets of hours for 1 day.</label>
+        Hay 2 sets de horas para 1 dia.</label>
     <p>
         <button class="btn btn-primary">Apply</button>
         <a href="../" class="btn btn-default">Cancel</a>
