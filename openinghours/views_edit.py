@@ -4,11 +4,6 @@ from openinghours.utils import get_premises_model
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView
 from collections import OrderedDict
-from django.contrib.auth.decorators import user_passes_test
-
-
-
-
 
 class OpeningHoursEditView(DetailView):
     """Powers editing UI supporting up to 2 time slots (sets) per day.
@@ -29,7 +24,6 @@ class OpeningHoursEditView(DetailView):
         """
         return "day%s_%s" % (day_n, slot_n)
     
-    @user_passes_test(lambda u:u.is_staff, login_url='/login/')
     def post(self, request, pk):
         """ Clean the data and save opening hours in the database.
         Old opening hours are purged before new ones are saved.
@@ -57,7 +51,6 @@ class OpeningHoursEditView(DetailView):
                                  company=location, weekday=day).save()
         return redirect(request.path_info)
     
-    @user_passes_test(lambda u:u.is_staff, login_url='/login/')
     def get(self, request, pk):
         """ Initialize the editing form
 
