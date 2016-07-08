@@ -59,29 +59,3 @@ class OpeningHours(models.Model):
             'from_hour': self.from_hour,
             'to_hour': self.to_hour
         }
-
-
-@python_2_unicode_compatible
-class ClosingRules(models.Model):
-    """
-    Used to overrule the OpeningHours. This will "close" the store due to
-    public holiday, annual closing or private party, etc.
-    """
-    class Meta:
-        verbose_name = _('Closing Rule')
-        verbose_name_plural = _('Closing Rules')
-        ordering = ['start']
-
-    company = models.ForeignKey(PREMISES_MODEL, verbose_name=_('Company'))
-    start = models.DateTimeField(_('Start'))
-    end = models.DateTimeField(_('End'))
-    reason = models.TextField(_('Reason'), null=True, blank=True)
-
-    def __str__(self):
-        return _("%(premises)s is closed from %(start)s to %(end)s\
-        due to %(reason)s") % {
-            'premises': self.company.name,
-            'start': str(self.start),
-            'end': str(self.end),
-            'reason': self.reason
-        }
