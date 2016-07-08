@@ -26,19 +26,6 @@ class Migration(migrations.Migration):
     dependencies = []
     operations = initial_operations + [
         migrations.CreateModel(
-            name='ClosingRules',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('start', models.DateTimeField()),
-                ('end', models.DateTimeField()),
-                ('reason', models.TextField(null=True, blank=True)),
-            ],
-            options={
-                'verbose_name': 'Closing Rule',
-                'verbose_name_plural': 'Closing Rules',
-            },
-        ),
-        migrations.CreateModel(
             name='OpeningHours',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -51,10 +38,5 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Opening Hours',
                 'verbose_name_plural': 'Opening Hours',
             },
-        ),
-        migrations.AddField(
-            model_name='closingrules',
-            name='company',
-            field=models.ForeignKey(to=PREMISES_MODEL),
         ),
     ]
