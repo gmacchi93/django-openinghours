@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView
 from collections import OrderedDict
 from django.contrib.admin.views.decorators import staff_member_required
-
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -28,6 +28,7 @@ class OpeningHoursEditView(DetailView):
         """
         return "day%s_%s" % (day_n, slot_n)
     
+    @login_required
     @staff_member_required
     def post(self, request, pk):
         """ Clean the data and save opening hours in the database.
@@ -55,7 +56,8 @@ class OpeningHoursEditView(DetailView):
                     OpeningHours(from_hour=opens, to_hour=shuts,
                                  company=location, weekday=day).save()
         return redirect(request.path_info)
-        
+    
+    @login_required
     @staff_member_required
     def get(self, request, pk):
         """ Initialize the editing form
