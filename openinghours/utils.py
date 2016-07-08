@@ -4,7 +4,7 @@ try:
     from threadlocals.threadlocals import get_current_request
 except ImportError:
     get_current_request = None
-from openinghours.models import OpeningHours, ClosingRules, PREMISES_MODEL
+from openinghours.models import OpeningHours, PREMISES_MODEL
 from django.core.exceptions import ImproperlyConfigured
 
 from compat import get_model
@@ -44,27 +44,6 @@ def get_now():
     return datetime.datetime.now()
 
 
-def get_closing_rule_for_now(location):
-    """
-    Returns QuerySet of ClosingRules that are currently valid
-    """
-    now = get_now()
-
-    if location:
-        return ClosingRules.objects.filter(company=location,
-                                           start__lte=now, end__gte=now)
-
-    return Company.objects.first().closingrules_set.filter(start__lte=now,
-                                                           end__gte=now)
-
-
-def has_closing_rule_for_now(location):
-    """
-    Does the company have closing rules to evaluate?
-    """
-    cr = get_closing_rule_for_now(location)
-    return cr.count()
-
 
 def is_open(location, now=None):
     """
@@ -73,9 +52,6 @@ def is_open(location, now=None):
     """
     if now is None:
         now = get_now()
-
-    if has_closing_rule_for_now(location):
-        return False
 
     now_time = datetime.time(now.hour, now.minute, now.second)
 
