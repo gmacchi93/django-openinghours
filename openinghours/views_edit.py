@@ -4,6 +4,9 @@ from openinghours.utils import get_premises_model
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView
 from collections import OrderedDict
+from django.contrib.admin.views.decorators import staff_member_required
+
+
 
 
 class OpeningHoursEditView(DetailView):
@@ -16,7 +19,7 @@ class OpeningHoursEditView(DetailView):
     """
     model = get_premises_model()
     template_name = "openinghours/edit_base.html"
-
+    
     def form_prefix(self, day_n, slot_n):
         """Form prefix made up of day number and slot number.
 
@@ -24,7 +27,8 @@ class OpeningHoursEditView(DetailView):
         - slot 1-2 typically morning and afternoon
         """
         return "day%s_%s" % (day_n, slot_n)
-
+    
+    @staff_member_required
     def post(self, request, pk):
         """ Clean the data and save opening hours in the database.
         Old opening hours are purged before new ones are saved.
@@ -51,7 +55,8 @@ class OpeningHoursEditView(DetailView):
                     OpeningHours(from_hour=opens, to_hour=shuts,
                                  company=location, weekday=day).save()
         return redirect(request.path_info)
-
+        
+    @staff_member_required
     def get(self, request, pk):
         """ Initialize the editing form
 
