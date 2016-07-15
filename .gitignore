@@ -8,3 +8,4 @@ app_media/
 app_static/
 openinghours.db
 .coverage
+env/

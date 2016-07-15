@@ -58,26 +58,6 @@ def next_time_open(location):
     return obj
 
 
-@register.filter(expects_localtime=True)
-def has_closing_rule_for_now(location, attr=None):
-    obj = utils.has_closing_rule_for_now(location)
-    if obj is False:
-        return False
-    if attr is not None:
-        return getattr(obj, attr)
-    return obj
-
-
-@register.filter(expects_localtime=True)
-def get_closing_rule_for_now(location, attr=None):
-    obj = utils.get_closing_rule_for_now(location)
-    if obj is False:
-        return False
-    if attr is not None:
-        return getattr(obj[0], attr)
-    return obj
-
-
 @register.simple_tag
 def opening_hours(location=None, concise=False):
     """
